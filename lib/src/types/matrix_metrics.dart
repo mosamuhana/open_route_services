@@ -1,0 +1,4 @@
+enum MatrixMetrics {
+  distance,
+  duration,
+}

@@ -1,0 +1,4 @@
+enum InstructionsFormat {
+  text,
+  html,
+}

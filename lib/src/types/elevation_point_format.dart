@@ -1,0 +1,4 @@
+enum ElevationPointFormat {
+  geojson,
+  point,
+}
