@@ -1,16 +1,17 @@
-# open_route_example
+# OpenRouteServices example
 
 A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Getting started
+- Create account [signup to openrouteservice.org](https://openrouteservice.org/dev/#/signup)
+- Go to Dashboard and create token (keep token secret)
+- Use it with the package
+example 
 
-A few resources to get you started if this is your first Flutter project:
+OpenRouteServices.init(apiKey: 'your token here');
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+## Usage
+copy ".env.example" to ".env" and add your token to API_KEY 
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+API_KEY=xxxxxxxxxxxxxxxxxxxxxxx
