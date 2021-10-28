@@ -1,4 +1,4 @@
-# open_route_services
+# open_route_services package
 
 ## Dart implementations for [OpenRouteServices API](https://openrouteservice.org)
 
