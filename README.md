@@ -1,6 +1,6 @@
 # open_route_services
 
-## Dart implementations for [OpenRouteServices](https://openrouteservice.org)
+## Dart implementations for [OpenRouteServices API](https://openrouteservice.org)
 
 ### Directions Service
 Openrouteservice’s directions can be used all around the globe. Consume rich route instructions in your applications for cars, trucks, different bike profiles, walking, hiking or wheelchair. Make use of plenty of options, ranging from different kinds of road restrictions to vehicle dimensions.
