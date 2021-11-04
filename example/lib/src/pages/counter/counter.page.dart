@@ -4,6 +4,8 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'reactive_counter.widget.dart';
 
 class CounterPage extends StatelessWidget {
+  static const route = '/counter';
+
   CounterPage({Key? key}) : super(key: key);
 
   final form = FormGroup({

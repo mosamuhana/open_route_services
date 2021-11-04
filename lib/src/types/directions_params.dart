@@ -9,9 +9,9 @@ import 'directions_preference.dart';
 import 'unit.dart';
 import 'alternative_routes.dart';
 import '../utils/enum_utils.dart';
-import '../utils/index.dart' show cleanMap;
+import '../utils/index.dart' show cleanMap, cleanList;
 
-class DirectionsPostParams {
+class DirectionsParams {
   final List<GeoLocation> coordinates;
   final List<DirectionsAttribute>? attributes;
   final bool? continueStraight;
@@ -34,7 +34,7 @@ class DirectionsPostParams {
   final AlternativeRoutes? alternativeRoutes;
   final CustomOptions? options;
 
-  DirectionsPostParams({
+  DirectionsParams({
     required this.coordinates,
     this.attributes,
     this.continueStraight,
@@ -58,7 +58,7 @@ class DirectionsPostParams {
     this.options,
   });
 
-  DirectionsPostParams copyWith({
+  DirectionsParams copyWith({
     List<GeoLocation>? coordinates,
     List<DirectionsAttribute>? attributes,
     bool? continueStraight,
@@ -81,7 +81,7 @@ class DirectionsPostParams {
     AlternativeRoutes? alternativeRoutes,
     CustomOptions? options,
   }) {
-    return DirectionsPostParams(
+    return DirectionsParams(
       coordinates: coordinates ?? this.coordinates,
       attributes: attributes ?? this.attributes,
       continueStraight: continueStraight ?? this.continueStraight,
@@ -111,26 +111,22 @@ class DirectionsPostParams {
       'coordinates': coordinates.map((x) => x.toMap()).toList(),
       'attributes':
           attributes == null ? null : EnumUtils.toStrngList(attributes),
-      'continue_straight':
-          continueStraight == null ? null : continueStraight!.toString(),
-      'elevation': elevation == null ? null : elevation!.toString(),
+      'continue_straight': continueStraight?.toString(),
+      'elevation': elevation?.toString(),
       'extra_info': extraInfo == null ? null : EnumUtils.toStrngList(extraInfo),
-      'geometry_simplify':
-          geometrySimplify == null ? null : geometrySimplify!.toString(),
+      'geometry_simplify': geometrySimplify?.toString(),
       'id': id,
-      'instructions': instructions == null ? null : instructions!.toString(),
+      'instructions': instructions?.toString(),
       'instructions_format': EnumUtils.toStrng(instructionsFormat),
       'language': language,
       'maneuvers': maneuvers == null ? null : maneuvers!.toString(),
       'preference': EnumUtils.toStrng(preference),
-      'radiuses': radiuses,
-      'roundabout_exits':
-          roundAboutExits == null ? null : roundAboutExits!.toString(),
-      'skip_segments': skipSegments,
-      'suppress_warnings':
-          suppressWarnings == null ? null : suppressWarnings!.toString(),
+      'radiuses': cleanList(radiuses),
+      'roundabout_exits': roundAboutExits?.toString(),
+      'skip_segments': cleanList(skipSegments),
+      'suppress_warnings': suppressWarnings?.toString(),
       'units': EnumUtils.toStrng(units),
-      'geometry': geometry == null ? null : geometry!.toString(),
+      'geometry': geometry?.toString(),
       'maximum_speed': maximumSpeed,
       'alternative_routes': alternativeRoutes?.toMap(),
       'options': options?.toMap(),
@@ -165,7 +161,7 @@ class DirectionsPostParams {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is DirectionsPostParams &&
+    return other is DirectionsParams &&
         listEquals(other.coordinates, coordinates) &&
         listEquals(other.attributes, attributes) &&
         other.continueStraight == continueStraight &&

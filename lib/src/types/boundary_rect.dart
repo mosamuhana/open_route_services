@@ -19,18 +19,20 @@ class BoundaryRect {
     );
   }
 
+  Map<String, String> toQueryMap() {
+    return {
+      'boundary.rect.min_lon': min.lon.toString(),
+      'boundary.rect.min_lat': min.lat.toString(),
+      'boundary.rect.max_lon': max.lon.toString(),
+      'boundary.rect.max_lat': max.lat.toString(),
+    };
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'min': min.toMap(),
       'max': max.toMap(),
     };
-  }
-
-  factory BoundaryRect.fromMap(Map<String, dynamic> map) {
-    return BoundaryRect(
-      min: GeoLocation.fromMap(map['min']),
-      max: GeoLocation.fromMap(map['max']),
-    );
   }
 
   @override

@@ -1,0 +1,97 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_map/flutter_map.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:positioned_tap_detector_2/positioned_tap_detector_2.dart';
+
+class MapPage extends StatefulWidget {
+  static const String route = '/tap';
+
+  const MapPage({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => MapPageState();
+}
+
+class MapPageState extends State<MapPage> {
+  List<LatLng> tappedPoints = [];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Select Location')),
+      body: Column(
+        children: [
+          Flexible(
+            child: FlutterMap(
+              options: MapOptions(
+                center: LatLng(31.323666, 34.306795),
+                zoom: 13.0,
+                onTap: _handleTap,
+              ),
+              layers: [
+                TileLayerOptions(
+                  urlTemplate: _mapUrlTemplate,
+                ),
+                MarkerLayerOptions(
+                  markers: tappedPoints.map(_createMarker).toList(),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Tap to add pins')),
+      //drawer: buildDrawer(context, TapToAddPage.route),
+      body: Column(
+        children: [
+          Flexible(
+            child: FlutterMap(
+              options: MapOptions(
+                center: LatLng(31.323666, 34.306795),
+                zoom: 13.0,
+                onTap: _handleTap,
+              ),
+              layers: [
+                TileLayerOptions(
+                  urlTemplate: _mapUrlTemplate,
+                ),
+                MarkerLayerOptions(
+                  markers: tappedPoints.map(_createMarker).toList(),
+                )
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _handleTap(TapPosition tapPosition, LatLng latlng) {
+    setState(() {
+      tappedPoints.add(latlng);
+    });
+  }
+}
+
+const _mapUrlTemplate = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
+
+final _markerImage = Image.asset(
+  'assets/marker.png',
+  width: 40,
+  height: 40,
+);
+
+Marker _createMarker(LatLng latlng) {
+  return Marker(
+    width: 40.0,
+    height: 40.0,
+    point: latlng,
+    builder: (ctx) => _markerImage, //const FlutterLogo(),
+    anchorPos: AnchorPos.align(AnchorAlign.top),
+  );
+}

@@ -4,21 +4,21 @@ import 'avoid_borders.dart';
 import 'avoid_features.dart';
 import 'roundtrip.dart';
 import '../utils/enum_utils.dart';
-import '../utils/index.dart' show cleanMap;
+import '../utils/index.dart' show cleanMap, cleanList;
 
 class CustomOptions {
   final AvoidBorders? avoidBorders;
-  final List<int> avoidCountries;
+  final List<int>? avoidCountries;
   final List<AvoidFeatures>? avoidFeatures;
   final String? avoidPolygons;
   final RoundTrip? roundTrip;
 
   CustomOptions({
-    required this.avoidBorders,
-    required this.avoidCountries,
-    required this.avoidFeatures,
-    required this.avoidPolygons,
-    required this.roundTrip,
+    this.avoidBorders,
+    this.avoidCountries,
+    this.avoidFeatures,
+    this.avoidPolygons,
+    this.roundTrip,
   });
 
   CustomOptions copyWith({
@@ -40,7 +40,7 @@ class CustomOptions {
   Map<String, dynamic>? toMap() {
     return cleanMap({
       'avoid_borders': EnumUtils.toStrng(avoidBorders),
-      'avoid_countries': avoidCountries,
+      'avoid_countries': cleanList(avoidCountries),
       'avoid_features': EnumUtils.toStrngList(avoidFeatures),
       'avoid_polygons': avoidPolygons,
       'round_trip': roundTrip?.toMap(),

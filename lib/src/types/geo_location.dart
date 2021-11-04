@@ -17,6 +17,20 @@ class GeoLocation {
     );
   }
 
+  Map<String, String> toQueryPoint() {
+    return {
+      'point.lon': lon.toString(),
+      'point.lat': lat.toString(),
+    };
+  }
+
+  Map<String, String> toQueryFocusPoint() {
+    return {
+      'focus.point.lon': lon.toString(),
+      'focus.point.lat': lat.toString(),
+    };
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'lon': lon,

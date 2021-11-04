@@ -3,20 +3,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:open_route_services/open_route_services.dart';
 
-import 'address_query_form.dart';
-import '../../widgets.dart';
-//import '../../nav.dart';
-
-class GeocodeSearchTab extends StatefulWidget {
+class GeocodeAutocompleteTab extends StatefulWidget {
   final void Function(List<Address>)? onChange;
 
-  const GeocodeSearchTab({Key? key, this.onChange}) : super(key: key);
+  const GeocodeAutocompleteTab({Key? key, this.onChange}) : super(key: key);
 
   @override
-  _GeocodeSearchTabState createState() => _GeocodeSearchTabState();
+  _GeocodeAutocompleteTabState createState() => _GeocodeAutocompleteTabState();
 }
 
-class _GeocodeSearchTabState extends State<GeocodeSearchTab> {
+class _GeocodeAutocompleteTabState extends State<GeocodeAutocompleteTab> {
   List<Address> addresses = [];
   bool loading = false;
   String? error;
@@ -48,17 +44,8 @@ class _GeocodeSearchTabState extends State<GeocodeSearchTab> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
-        AddressQueryForm(
-          onSearch: loading ? null : search,
-        ),
-        Expanded(
-          child: AddressListView(
-            loading: loading,
-            result: addresses,
-            error: error,
-          ),
-        ),
+      children: const [
+        Text('Hello '),
       ],
     );
   }

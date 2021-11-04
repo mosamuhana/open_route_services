@@ -1,12 +1,14 @@
+import '../utils/index.dart' show cleanMap;
+
 class AlternativeRoutes {
-  final int shareFactor;
-  final int targetCount;
-  final int weightFactor;
+  final int? shareFactor;
+  final int? targetCount;
+  final int? weightFactor;
 
   AlternativeRoutes({
-    required this.shareFactor,
-    required this.targetCount,
-    required this.weightFactor,
+    this.shareFactor,
+    this.targetCount,
+    this.weightFactor,
   });
 
   AlternativeRoutes copyWith({
@@ -21,25 +23,20 @@ class AlternativeRoutes {
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'shareFactor': shareFactor,
-      'targetCount': targetCount,
-      'weightFactor': weightFactor,
-    };
-  }
-
-  factory AlternativeRoutes.fromMap(Map<String, dynamic> map) {
-    return AlternativeRoutes(
-      shareFactor: map['shareFactor']?.toInt(),
-      targetCount: map['targetCount']?.toInt(),
-      weightFactor: map['weightFactor']?.toInt(),
-    );
+  Map<String, dynamic>? toMap() {
+    return cleanMap({
+      'share_factor': shareFactor,
+      'target_count': targetCount,
+      'weight_factor': weightFactor,
+    });
   }
 
   @override
-  String toString() =>
-      'AlternativeRoutes (shareFactor: $shareFactor, targetCount: $targetCount, weightFactor: $weightFactor)';
+  String toString() => 'AlternativeRoutes ('
+      'shareFactor: $shareFactor, '
+      'targetCount: $targetCount, '
+      'weightFactor: $weightFactor'
+      ')';
 
   @override
   bool operator ==(Object other) {

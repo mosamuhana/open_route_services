@@ -6,13 +6,14 @@ import 'geo_location.dart';
 import 'source.dart';
 import 'layer.dart';
 import '../utils/enum_utils.dart';
+import '../utils/index.dart' show cleanMap;
 
 /*
   "'null' is an invalid layers parameter. Valid options: coarse,address,venue,street,country,macroregion,region,county,localadmin,locality,borough,neighbourhood,continent,empire,dependency,macrocounty,macrohood,microhood,disputed,postalcode,ocean,marinearea",
   "'null' is an invalid sources parameter. Valid options: osm,oa,gn,wof,no_gn,openstreetmap,openaddresses,geonames,whosonfirst"
 */
 
-class GeocodeSearchParams {
+class GeocodeParams {
   final List<ServiceSource> sources;
   final List<ServiceLayer> layers;
   final String? text;
@@ -24,7 +25,7 @@ class GeocodeSearchParams {
   final GeoLocation? focus;
   final int? size;
 
-  GeocodeSearchParams({
+  GeocodeParams({
     required this.sources,
     required this.layers,
     this.text,
@@ -37,7 +38,7 @@ class GeocodeSearchParams {
     this.size,
   });
 
-  GeocodeSearchParams copyWith({
+  GeocodeParams copyWith({
     List<ServiceSource>? sources,
     List<ServiceLayer>? layers,
     String? text,
@@ -49,7 +50,7 @@ class GeocodeSearchParams {
     GeoLocation? focus,
     int? size,
   }) {
-    return GeocodeSearchParams(
+    return GeocodeParams(
       sources: sources ?? this.sources,
       text: text ?? this.text,
       point: point ?? this.point,
@@ -63,26 +64,25 @@ class GeocodeSearchParams {
     );
   }
 
-  Map<String, dynamic> toQueryMap() {
-    return {
-      'sources': EnumUtils.toStrngList(sources)!.join(','),
-      'layers': EnumUtils.toStrngList(layers)!.join(','),
+  Map<String, dynamic>? toQueryMap() {
+    return cleanMap({
+      'sources': EnumUtils.toStrngList(sources)?.join(','),
+      'layers': EnumUtils.toStrngList(layers)?.join(','),
       'text': text,
-      'point.lon': point?.lon,
-      'point.lat': point?.lat,
-      'rect': rect?.toMap(),
-      'circle': circle?.toMap(),
-      'country': country,
-      'gid': gid,
-      'focus': focus?.toMap(),
-      'size': size,
-    };
+      ...(point?.toQueryPoint() ?? {}),
+      ...(focus?.toQueryFocusPoint() ?? {}),
+      ...(rect?.toQueryMap() ?? {}),
+      ...(circle?.toQueryMap() ?? {}),
+      'boundary.country': country,
+      'boundary.gid': gid,
+      'size': size?.toString(),
+    });
   }
 
-  Map<String, dynamic> toMap() {
-    return {
-      'sources': EnumUtils.toStrngList(sources)!.join(','),
-      'layers': EnumUtils.toStrngList(layers)!.join(','),
+  Map<String, dynamic>? toMap() {
+    return cleanMap({
+      'sources': EnumUtils.toStrngList(sources),
+      'layers': EnumUtils.toStrngList(layers),
       'text': text,
       'point': point?.toMap(),
       'rect': rect?.toMap(),
@@ -91,39 +91,29 @@ class GeocodeSearchParams {
       'gid': gid,
       'focus': focus?.toMap(),
       'size': size,
-    };
+    });
   }
-
-  /*
-  factory GeocodeSearchParams.fromMap(Map<String, dynamic> map) {
-    final rect = map['rect'];
-    final circle = map['circle'];
-    final point = map['point'];
-    final focus = map['focus'];
-    return GeocodeSearchParams(
-      rect: rect == null ? null : BoundaryRect.fromMap(rect),
-      circle: circle == null ? null : BoundaryCircle.fromMap(circle),
-      country: map['country'],
-      gid: map['gid'],
-      text: map['text'],
-      point: point == null ? null : GeoLocation.fromMap(point),
-      focus: focus == null ? null : GeoLocation.fromMap(focus),
-      sources: List<String>.from(map['sources']),
-      layers: List<String>.from(map['layers']),
-      size: map['size']?.toInt(),
-    );
-  }
-  */
 
   @override
   String toString() {
-    return 'GeocodeSearchParams(rect: $rect, circle: $circle, country: $country, gid: $gid, text: $text, point: $point, focus: $focus, sources: $sources, layers: $layers, size: $size)';
+    return 'GeocodeSearchParams ('
+        'rect: $rect, '
+        'circle: $circle, '
+        'country: $country, '
+        'gid: $gid, '
+        'text: $text, '
+        'point: $point, '
+        'focus: $focus, '
+        'sources: $sources, '
+        'layers: $layers, '
+        'size: $size'
+        ')';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is GeocodeSearchParams &&
+    return other is GeocodeParams &&
         other.rect == rect &&
         other.circle == circle &&
         other.country == country &&

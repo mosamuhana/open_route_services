@@ -8,15 +8,17 @@ class AddressQueryForm extends StatelessWidget {
 
   final form = FormGroup({
     'address': FormControl<String>(
-      value: 'Gaza',
-      validators: [Validators.required, Validators.minLength(3)],
+      validators: [
+        Validators.required,
+        Validators.minLength(3),
+      ],
     ),
   });
 
   void search() async {
     form.markAsDisabled();
     try {
-      await onSearch!(form.value['address'] as String);
+      await onSearch!(form.value['address'].toString());
     } catch (e) {
       //...
     }
@@ -44,9 +46,7 @@ class AddressQueryForm extends StatelessWidget {
                 builder: (context, form, child) {
                   return IconButton(
                     icon: const Icon(Icons.search),
-                    onPressed: form.invalid || form.disabled || onSearch == null
-                        ? null
-                        : search,
+                    onPressed: form.invalid || form.disabled || onSearch == null ? null : search,
                     splashRadius: 24,
                   );
                 },

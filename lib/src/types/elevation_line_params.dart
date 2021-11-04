@@ -32,8 +32,8 @@ class ElevationLineParams {
 
   Map<String, dynamic>? toMap() {
     return cleanMap({
-      'formatIn': EnumUtils.toStrng(formatIn),
-      'formatOut': EnumUtils.toStrng(formatOut),
+      'format_in': EnumUtils.toStrng(formatIn),
+      'format_out': EnumUtils.toStrng(formatOut),
       'dataset': dataset,
       'geometry': geometry,
     });

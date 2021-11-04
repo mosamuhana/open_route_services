@@ -5,7 +5,7 @@ import 'utils/http.dart';
 import 'types/geo_location.dart';
 import 'types/profile.dart';
 import 'types/format.dart';
-import 'types/directions_post_params.dart';
+import 'types/directions_params.dart';
 
 class DirectionsService {
   Future<dynamic> get({
@@ -24,7 +24,7 @@ class DirectionsService {
   }
 
   Future<dynamic> post({
-    required DirectionsPostParams params,
+    required DirectionsParams params,
     Profile? profile,
     Format? format,
   }) async {

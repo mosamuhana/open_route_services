@@ -6,51 +6,42 @@ import 'package:open_route_services/open_route_services.dart';
 import '../../widgets.dart';
 import 'location_form.dart';
 
-class GeocodeReversePage extends StatefulWidget {
-  const GeocodeReversePage({Key? key}) : super(key: key);
+class GeocodeReverseTab extends StatefulWidget {
+  final void Function(List<Address>)? onChange;
+
+  const GeocodeReverseTab({Key? key, this.onChange}) : super(key: key);
 
   @override
-  _GeocodeReversePageState createState() => _GeocodeReversePageState();
+  _GeocodeReverseTabState createState() => _GeocodeReverseTabState();
 }
 
-class _GeocodeReversePageState extends State<GeocodeReversePage> {
-  final _lonController = TextEditingController();
-  final _latController = TextEditingController();
-  List<Address> results = [];
+class _GeocodeReverseTabState extends State<GeocodeReverseTab> {
+  List<Address> addresses = [];
   bool isLoading = false;
-
-  _GeocodeReversePageState();
-
-  @override
-  void initState() {
-    _latController.text = '31.323666';
-    _lonController.text = '34.306795';
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _lonController.dispose();
-    _latController.dispose();
-    super.dispose();
-  }
+  String? error;
 
   Future search(GeoLocation point) async {
-    setState(() => isLoading = true);
+    isLoading = true;
+    addresses = [];
+    error = null;
+    widget.onChange?.call(addresses);
+    setState(() {});
 
     try {
-      final res = await OpenRouteServices.geocode.reverse(GeocodeSearchParams(
+      final res = await OpenRouteServices.geocode.reverse(GeocodeParams(
         point: point,
         layers: ServiceLayer.values,
         sources: ServiceSource.values,
       ));
-      //print(res);
-      setState(() => results = res);
+      addresses = res;
     } catch (e) {
+      error = e.toString();
       print("Error occured: $e");
-    } finally {
-      setState(() => isLoading = false);
     }
+
+    isLoading = false;
+    widget.onChange?.call(addresses);
+    setState(() {});
   }
 
   @override
@@ -63,7 +54,7 @@ class _GeocodeReversePageState extends State<GeocodeReversePage> {
         Expanded(
           child: AddressListView(
             loading: isLoading,
-            result: results,
+            result: addresses,
           ),
         ),
       ],

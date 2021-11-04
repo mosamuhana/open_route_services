@@ -135,8 +135,8 @@ class Address {
     final properties = map['properties'] as Map;
     return Address._(
       coordinates: GeoLocation(
-        lat: coordinates[0]?.toDouble(),
-        lon: coordinates[1]?.toDouble(),
+        lon: coordinates[0]?.toDouble(),
+        lat: coordinates[1]?.toDouble(),
       ),
       id: properties['id'],
       gid: properties['gid'],

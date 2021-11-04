@@ -19,18 +19,19 @@ class BoundaryCircle {
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, String> toQueryMap() {
+    return {
+      'boundary.circle.lon': center.lon.toString(),
+      'boundary.circle.lat': center.lat.toString(),
+      'boundary.circle.radius': radius.toString(),
+    };
+  }
+
+  Map<String, dynamic>? toMap() {
     return {
       'center': center.toMap(),
       'radius': radius,
     };
-  }
-
-  factory BoundaryCircle.fromMap(Map<String, dynamic> map) {
-    return BoundaryCircle(
-      center: GeoLocation.fromMap(map['center']),
-      radius: map['radius']?.toDouble(),
-    );
   }
 
   @override
