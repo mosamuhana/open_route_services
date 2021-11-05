@@ -30,3 +30,4 @@ export 'roundtrip.dart';
 export 'source.dart';
 export 'unit.dart';
 export 'address.dart';
+export 'geocode_result.dart';

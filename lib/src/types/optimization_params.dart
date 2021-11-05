@@ -1,6 +1,4 @@
-import 'package:flutter/foundation.dart';
-
-import '../utils/index.dart' show cleanMap;
+import '../utils/index.dart' show cleanMap, listEquals;
 
 class OptimizationParams {
   final List<OptimizationJob> jobs;

@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import 'geo_location.dart';
 import 'custom_options.dart';
 import 'unit.dart';
@@ -8,6 +6,7 @@ import 'range_type.dart';
 import 'isochrones_attribute.dart';
 
 import '../utils/enum_utils.dart';
+import '../utils/index.dart' show listEquals;
 
 class IsochronesRequestParams {
   final List<GeoLocation> locations;

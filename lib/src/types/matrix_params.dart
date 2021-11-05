@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
-
 import 'geo_location.dart';
 import 'matrix_metrics.dart';
 import 'unit.dart';
 import '../utils/enum_utils.dart';
-import '../utils/index.dart' show cleanMap;
+import '../utils/index.dart' show cleanMap, listEquals;
 
 class MatrixParams {
   final List<GeoLocation> locations;
@@ -56,8 +54,7 @@ class MatrixParams {
       'id': id,
       'metrics': EnumUtils.toStrngList(metrics),
       'metricsStrings': metricsStrings, // as is from service
-      'resolve_locations':
-          resolveLocations == null ? null : resolveLocations!.toString(),
+      'resolve_locations': resolveLocations == null ? null : resolveLocations!.toString(),
       'sources': sources,
       'units': EnumUtils.toStrng(units),
     });

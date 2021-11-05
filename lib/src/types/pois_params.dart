@@ -1,9 +1,7 @@
-import 'package:flutter/foundation.dart';
-
 import 'pois_request.dart';
 import 'pois_sortby.dart';
 import 'boundary_rect.dart';
-import '../utils/index.dart' show cleanMap, cleanList;
+import '../utils/index.dart' show cleanMap, cleanList, listEquals;
 import '../utils/enum_utils.dart';
 
 class PoisParams {
@@ -68,8 +66,7 @@ class PoisParams {
   }
 
   @override
-  int get hashCode =>
-      Object.hashAll([request, geometry, filters, limit, sortBy]);
+  int get hashCode => Object.hashAll([request, geometry, filters, limit, sortBy]);
 }
 
 class PoisGeometry {
@@ -113,10 +110,7 @@ class PoisGeometry {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
-    return other is PoisGeometry &&
-        listEquals(other.bbox, bbox) &&
-        other.buffer == buffer &&
-        other.geojson == geojson;
+    return other is PoisGeometry && listEquals(other.bbox, bbox) && other.buffer == buffer && other.geojson == geojson;
   }
 
   @override
@@ -162,7 +156,7 @@ class PoisFilters {
     return cleanMap({
       'category_group_ids': cleanList(categoryGroupIds),
       'category_ids': cleanList(categoryIds),
-      'name':cleanList(name),
+      'name': cleanList(name),
       'wheelchair': cleanList(wheelchair),
       'smoking': cleanList(smoking),
       'fee': cleanList(fee),

@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 import 'geo_location.dart';
 import 'custom_options.dart';
 import 'directions_attribute.dart';
@@ -9,7 +7,7 @@ import 'directions_preference.dart';
 import 'unit.dart';
 import 'alternative_routes.dart';
 import '../utils/enum_utils.dart';
-import '../utils/index.dart' show cleanMap, cleanList;
+import '../utils/index.dart' show cleanMap, cleanList, listEquals;
 
 class DirectionsParams {
   final List<GeoLocation> coordinates;
@@ -109,8 +107,7 @@ class DirectionsParams {
   Map<String, dynamic>? toMap() {
     return cleanMap({
       'coordinates': coordinates.map((x) => x.toMap()).toList(),
-      'attributes':
-          attributes == null ? null : EnumUtils.toStrngList(attributes),
+      'attributes': attributes == null ? null : EnumUtils.toStrngList(attributes),
       'continue_straight': continueStraight?.toString(),
       'elevation': elevation?.toString(),
       'extra_info': extraInfo == null ? null : EnumUtils.toStrngList(extraInfo),

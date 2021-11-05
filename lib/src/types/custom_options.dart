@@ -1,10 +1,8 @@
-import 'package:flutter/foundation.dart';
-
 import 'avoid_borders.dart';
 import 'avoid_features.dart';
 import 'roundtrip.dart';
 import '../utils/enum_utils.dart';
-import '../utils/index.dart' show cleanMap, cleanList;
+import '../utils/index.dart' show cleanMap, cleanList, listEquals;
 
 class CustomOptions {
   final AvoidBorders? avoidBorders;

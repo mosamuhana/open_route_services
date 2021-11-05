@@ -1,17 +1,10 @@
-import 'package:flutter/foundation.dart';
-
 import 'boundary_rect.dart';
 import 'boundary_circle.dart';
 import 'geo_location.dart';
 import 'source.dart';
 import 'layer.dart';
 import '../utils/enum_utils.dart';
-import '../utils/index.dart' show cleanMap;
-
-/*
-  "'null' is an invalid layers parameter. Valid options: coarse,address,venue,street,country,macroregion,region,county,localadmin,locality,borough,neighbourhood,continent,empire,dependency,macrocounty,macrohood,microhood,disputed,postalcode,ocean,marinearea",
-  "'null' is an invalid sources parameter. Valid options: osm,oa,gn,wof,no_gn,openstreetmap,openaddresses,geonames,whosonfirst"
-*/
+import '../utils/index.dart' show cleanMap, listEquals;
 
 class GeocodeParams {
   final List<ServiceSource> sources;

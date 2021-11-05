@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'types/geocode_params.dart';
 import 'types/address.dart';
+import 'types/geocode_result.dart';
 import 'utils.dart';
 
 class GeocodeService {
@@ -22,15 +23,17 @@ class GeocodeService {
   }
 
   Future<dynamic> structured(GeocodeParams params) async {
-    final res =
-        await Http.get('geocode/search/structured', params.toQueryMap());
+    final res = await Http.get('geocode/search/structured', params.toQueryMap());
     //print(res.body);
     return jsonDecode(res.body);
   }
 
-  Future<dynamic> autocomplete(GeocodeParams params) async {
-    final res = await Http.get('geocode/autocomplete', params.toQueryMap());
-    //print(res.body);
-    return jsonDecode(res.body);
+  Future<GeocodingResult> autocomplete(GeocodeParams params) async {
+    final response = await Http.get('geocode/autocomplete', params.toQueryMap());
+    //print(response.body);
+    final map = jsonDecode(response.body);
+    final result = GeocodingResult.fromMap(map);
+    //print(result);
+    return result;
   }
 }
