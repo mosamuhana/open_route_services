@@ -24,6 +24,9 @@ dependencies:
   #map_launcher: ^2.1.1
   #map_picker: ^0.0.3
   #map: ^1.0.0
+  autocomplete_field:
+    git: https://github.com/mosamuhana/flutter_autocomplete_field.git
+    #path: ../../../FLUTTER_AUTOCOMPLETE/flutter_autocomplete_field
 
 
 dev_dependencies:

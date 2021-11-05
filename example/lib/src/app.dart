@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 
-//import 'nav.dart';
-//import 'pages.dart';
-import 'pages/autocomplete_demo.page.dart';
+import 'nav.dart';
+import 'pages.dart';
+//import 'pages/autocomplete_field_demo.page.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AutocompleteDemoPage(),
-      //routes: Nav.routes,
+      routes: Nav.routes,
+      home: const HomePage(),
+      //home: AutocompleteFieldDemoPage(),
     );
   }
 }
